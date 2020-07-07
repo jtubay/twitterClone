@@ -10,7 +10,7 @@ form.addEventListener('submit', (e) => {
     log('hello');
     const formData = new FormData(form);
     const name = formData.get('name');
-    const content = formData.get('conten');
+    const content = formData.get('content');
 
     const mew = {
         name,
@@ -26,5 +26,11 @@ form.addEventListener('submit', (e) => {
         headers: {
             'content-type': 'application/json'
         }
-    });
+    }).then(response => response.json())
+        .then(createdMew => {
+            console.log(createdMew)
+            form.reset()
+            form.style.display = '';
+            loadingE.style.display = 'none'
+        });
 })
